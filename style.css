@@ -145,6 +145,29 @@ img {
   }
 }
 @media (min-width: 768px) {
+  button{
+        
+    border-radius: 50px;
+    background: linear-gradient(to top, #547792, #ffffff);
+    border: none;
+  }
+  .admin_new_user{
+    top: 900px;
+    align-items: center;
+    display: flex;
+    position: fixed;
+  }
+  .admin_table {
+    width: 100%;
+    border-collapse: collapse;
+    font-weight: 800;
+}
+.admin_table_th{
+    border: 1px solid black;
+    font-size: 16px;
+    font-weight: 800;
+    text-align: center;
+}
   .products-element-list {
     display: grid;
     list-style: none;

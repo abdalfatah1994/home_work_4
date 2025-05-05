@@ -1,6 +1,40 @@
 <?php
+session_start();
+$dsn = "mysql:host=localhost;dbname=store_data_base;charset=utf8";
+$username = "root";
+$password = "";
+$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
 
+try {
+    $pdo = new PDO($dsn, $username, $password, $options);
+} catch (PDOException $e) {
+    die("فشل الاتصال: " . $e->getMessage());
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $stmt = $pdo->prepare("SELECT id, username, role FROM users_table WHERE username = ? AND password = ?");
+    $stmt->execute([$_POST['username'], $_POST['password']]);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($user) {
+        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['username'] = $user['username'];
+        $_SESSION['role'] = $user['role']; 
+
+        // منح صلاحيات المسؤول
+        if ($user['role'] === 'admin') {
+            $_SESSION['admin'] = true;
+        }
+
+        header("Location: userd.php");
+        exit;
+    } else {
+        echo "اسم المستخدم أو كلمة المرور غير صحيحة.";
+    }
+}
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,7 +47,7 @@
     <title> LOG IN </title>
   </head>
   <body style="padding-top: 500px;display: flex;justify-content: center;align-items: center;width: 100%;">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: linear-gradient(to left ,#547792,#ffffff);display: flex;position:fixed;width: 100%;top: 0px ; z-index: 99;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: linear-gradient(to right ,#547792,#ffffff);display: flex;position:fixed;width: 100%;top: 0px ; z-index: 99;">
       <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
