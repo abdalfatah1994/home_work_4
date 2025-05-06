@@ -47,7 +47,7 @@ try {
         crossorigin="anonymous" referrerpolicy="no-referrer" />
   <title>تفاصيل المنتج</title>
 </head>
-<body style="background: linear-gradient(to left, #547792, #007074);">
+<body >
   <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: linear-gradient(to left, #547792, #ffffff); display: flex; position: fixed; width: 100%; top: 0px; z-index: 99;">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,13 +116,13 @@ try {
   </span>
   
 
-  <div class="container" style="margin-top:120px;">
+  <div class="container">
     <?php if (!empty($error_message)): ?>
       <div class="alert alert-danger" role="alert">
         <?= $error_message; ?>
       </div>
     <?php else: ?>
-      <div class="card">
+      <div class="card_product">
         <?php if (!empty($product['img_url_product'])): ?>
           <img src="<?= htmlspecialchars($product['img_url_product']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['name_product']); ?>" style="max-height:300px; object-fit:cover;">
         <?php endif; ?>

@@ -1,11 +1,23 @@
 <?php
-$host = "localhost";
-$dbname = "store_db";
+$dsn = "mysql:host=localhost;dbname=store_data_base;charset=utf8";
 $username = "root";
 $password = "";
-$conn = new mysqli($host, $username, $password, $dbname);
-if ($conn->connect_error) {
-  die("فشل الاتصال بقاعدة البيانات: " . $conn->connect_error);
+
+try {
+  $conn = new PDO($dsn, $username, $password, [
+    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES => false
+  ]);
+
+  $db_exists_query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'store_data_base'";
+  $stmt = $conn->query($db_exists_query);
+
+  if ($stmt->rowCount() == 0) {
+    $conn->exec("CREATE DATABASE store_data_base");
+  }
+} catch (PDOException $e) {
+  die("فشل الاتصال بقاعدة البيانات: " . $e->getMessage());
 }
 ?>
 <!DOCTYPE html>
@@ -50,8 +62,34 @@ if ($conn->connect_error) {
       </div>
     </div>
   </nav>
-  </div>
-  <!-- <H1 class="title_home_page"> HOME PAGE</H1> -->
+  <span class="element-footer">
+    <p>© 2025 All rights reserved </p>
+    <p> Developed AND MAINTAINED BY * ONBASHY COMPANEY * </p>
+    <p> Contact With Us </p>
+    <ul style="display: flex;list-style-type: none;font-size: 20px; ">
+      <li class="nav-item" style="margin: 5px;">
+        <a class="nav-link" href="https://wa.me/+963951371241"> <i class="fa-brands fa-whatsapp"></i></a>
+      </li>
+      <li class="nav-item" style="margin: 5px;">
+        <a class="nav-link" href="https://t.me/abdalfatah_onbashy"><i class="fa-brands fa-telegram"></i></a>
+      </li>
+      <li style="margin: 5px;" class="nav-item">
+        <a class="nav-link" href="https://www.facebook.com/share/16BY2dqi7T/"> <i class="fa-brands fa-facebook"></i></a>
+      </li>
+      <li class="nav-item" style="margin: 5px;">
+        <a class="nav-link" href="https://www.abdalfatahonbashy1994@gmail.com"> <i class="fa-solid fa-envelope"></i></a>
+      </li>
+      <!--  github رابط -->
+      <li class="nav-item" style="margin: 5px;">
+        <a class="nav-link" href="#"> <i class="fa-brands fa-github"></i> </a>
+      </li>
+      <!--  linkedin رابط -->
+      <li class="nav-item" style="margin: 5px;">
+        <a class="nav-link" href="#"> <i class="fa-brands fa-linkedin"></i></i> </a>
+      </li>
+    </ul>
+  </span>
+
   <div class="cards">
     <a href="./products.php" class="card" target="_blank">
       <div>GO TO PRODUCTS PAGE <br> الذهاب الى صفحة المنتجات</div>
@@ -63,76 +101,12 @@ if ($conn->connect_error) {
       <div>GO TO USERS PAGE <br> الذهاب الى صفحة المستخدمين</div>
     </a>
   </div>
-  <!-- 
-$num = 3.14159;
-echo number_format($num, 2); // الناتج: "3.14"
--->
   <div class="products-element">
-    <ul class="products-element-list">
+  
 
+  </div>
 
-      <li class="product-img"> <a href="#"><img src="./images/ppr/CLIP-2.jpg" alt=" CLIP " loading="lazy" width="400" height="400" srcset="" sizes="(max-width: 500px) 100vw, 500px">
-          <h2> Adaptor Boxes </mark></h2>
-        </a></li>
-      <li class="product-img"> <a href="#"><img src="./images/ppr/CLIP-2.jpg" alt=" CLIP " loading="lazy" width="400" height="400" srcset="" sizes="(max-width: 500px) 100vw, 500px">
-          <h2> Adaptor Boxes </mark></h2>
-        </a></li>
-      <li class="product-img"> <a href="#"><img src="./images/ppr/CLIP-2.jpg" alt=" CLIP " loading="lazy" width="400" height="400" srcset="" sizes="(max-width: 500px) 100vw, 500px">
-          <h2> Adaptor Boxes </mark></h2>
-        </a></li>
-      <li class="product-img"> <a href="#"><img src="./images/ppr/CLIP-2.jpg" alt=" CLIP " loading="lazy" width="400" height="400" srcset="" sizes="(max-width: 500px) 100vw, 500px">
-          <h2> Adaptor Boxes </mark></h2>
-        </a></li>
-      <li class="product-img"> <a href="#"><img src="./images/ppr/CLIP-2.jpg" alt=" CLIP " loading="lazy" width="400" height="400" srcset="" sizes="(max-width: 500px) 100vw, 500px">
-          <h2> Adaptor Boxes </mark></h2>
-        </a></li>
-      <li class="product-img"> <a href="#"><img src="./images/ppr/CLIP-2.jpg" alt=" CLIP " loading="lazy" width="400" height="400" srcset="" sizes="(max-width: 500px) 100vw, 500px">
-          <h2> Adaptor Boxes </mark></h2>
-        </a></li>
-      <li class="product-img"> <a href="#"><img src="./images/ppr/CLIP-2.jpg" alt=" CLIP " loading="lazy" width="400" height="400" srcset="" sizes="(max-width: 500px) 100vw, 500px">
-          <h2> Adaptor Boxes </mark></h2>
-        </a></li>
-      <li class="product-img"> <a href="#"><img src="./images/ppr/CLIP-2.jpg" alt=" CLIP " loading="lazy" width="400" height="400" srcset="" sizes="(max-width: 500px) 100vw, 500px">
-          <h2> Adaptor Boxes </mark></h2>
-        </a></li>
-      <li class="product-img"> <a href="#"><img src="./images/ppr/CLIP-2.jpg" alt=" CLIP " loading="lazy" width="400" height="400" srcset="" sizes="(max-width: 500px) 100vw, 500px">
-          <h2> Adaptor Boxes </mark></h2>
-        </a></li>
-      <li class="product-img"> <a href="#"><img src="./images/ppr/CLIP-2.jpg" alt=" CLIP " loading="lazy" width="400" height="400" srcset="" sizes="(max-width: 500px) 100vw, 500px">
-          <h2> Adaptor Boxes </mark></h2>
-        </a></li>
-      <li class="product-img"> <a href="#"><img src="./images/ppr/CLIP-2.jpg" alt=" CLIP " loading="lazy" width="400" height="400" srcset="" sizes="(max-width: 500px) 100vw, 500px">
-          <h2> Adaptor Boxes </mark></h2>
-        </a></li>
-    </ul>
-    <span class="element-footer">
-      <p>© 2025 All rights reserved </p>
-      <p> Developed AND MAINTAINED BY ONBASHY COMPANEY </p>
-      <p> Contact With Us </p>
-      <ul style="display: flex;list-style-type: none;font-size: 20px; ">
-        <li class="nav-item" style="margin: 5px;">
-          <a class="nav-link" href="https://wa.me/+963951371241"> <i class="fa-brands fa-whatsapp"></i></a>
-        </li>
-        <li class="nav-item" style="margin: 5px;">
-          <a class="nav-link" href="https://t.me/abdalfatah_onbashy"><i class="fa-brands fa-telegram"></i></a>
-        </li>
-        <li style="margin: 5px;" class="nav-item">
-          <a class="nav-link" href="https://www.facebook.com/share/16BY2dqi7T/"> <i class="fa-brands fa-facebook"></i></a>
-        </li>
-        <li class="nav-item" style="margin: 5px;">
-          <a class="nav-link" href="https://www.abdalfatahonbashy1994@gmail.com"> <i class="fa-solid fa-envelope"></i></a>
-        </li>
-        <!--  github رابط -->
-        <li class="nav-item" style="margin: 5px;">
-          <a class="nav-link" href="#"> <i class="fa-brands fa-github"></i> </a>
-        </li>
-        <!--  linkedin رابط -->
-        <li class="nav-item" style="margin: 5px;">
-          <a class="nav-link" href="#"> <i class="fa-brands fa-linkedin"></i></i> </a>
-        </li>
-      </ul>
-    </span>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 
 </html>

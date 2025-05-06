@@ -85,7 +85,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
   <title>إدارة المستخدمين </title>
 </head>
 
-<body style="background: linear-gradient(to left, #547792, #007074);padding-top: 100px;">
+<body style="background: linear-gradient(to left, #547792, #007074);padding: 75px 0px;">
   <span class="element-footer">
     <p>© 2025 All rights reserved </p>
     <p> Developed AND MAINTAINED BY ONBASHY COMPANEY </p>
@@ -142,6 +142,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     </div>
   </nav>
 
+  <h3 class="admin_hader"> Users Data table / جدول بيانات المستخدمين</h3>
   <table class="admin_table">
     <tr>
       <th class="admin_table_th">النوع الحالي للحساب</th>

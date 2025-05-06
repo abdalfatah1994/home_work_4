@@ -31,9 +31,9 @@ if (isset($_POST['logout'])) {
 </head>
 
 <body style="background: linear-gradient(to left, #547792, #007074); text-align: center;">
-    <h2>تفاصيل الجلسة</h2>
+    <h1>تفاصيل الجلسة</h1>
 
-    <table border="1" style="width: 50%; margin: auto; text-align: center;">
+    <table border="1" style="width: 50%; margin: auto; text-align: center;font-size: 26px;">
         <tr>
             <th>اسم المستخدم</th>
             <th>مدة تسجيل الدخول</th>
@@ -43,9 +43,7 @@ if (isset($_POST['logout'])) {
             <td><?= sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds) ?></td>
         </tr>
     </table>
-
-    <form method="POST">
-        <button type="submit" name="logout" style="margin-top: 20px; padding: 10px 20px; font-size: 18px;">تسجيل الخروج</button>
-    </form>
+    
+   
 </body>
 </html>
