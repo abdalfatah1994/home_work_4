@@ -133,6 +133,9 @@ img {
 }
 @media (min-width: 768px) {
 
+.mb-4{
+  margin-top: auto;
+}
   .products-element {
     display: flex;
     flex-wrap: wrap;
@@ -191,10 +194,15 @@ img {
   }
 
   .admin_new_user input {
-    width: 80%;
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 15px;
+    border: 2px solid #333;
     border-radius: 5px;
+  }
+
+  .admin_new_user label {
+    text-align: center;
+    font-size: 18px;
+    padding: 15px 8px;
   }
 
   .admin_new_user button {
