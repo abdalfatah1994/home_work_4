@@ -101,7 +101,7 @@ try {
       </div>
     <?php endif; ?>
     
-    <table class="admin_table" >
+    <table class="admin_table" style="margin:65px;width: 200vh;">
       <tr>
         <th class="admin_table_th"> PRODUCT NAME / اسم المنتج</th>
         <th class="admin_table_th"> $ : PRICE  السعر</th>
@@ -115,13 +115,13 @@ try {
             <td class="admin_table_th"><?= htmlspecialchars($product['price_product']); ?></td>
             <td class="admin_table_th">
               <?php if (!empty($product['img_url_product'])): ?>
-                <img src="<?= htmlspecialchars($product['img_url_product']); ?>" alt="<?= htmlspecialchars($product['name_product']); ?>" style="max-width:100px;">
+                <img src="<?= htmlspecialchars($product['img_url_product']); ?>" alt="<?= htmlspecialchars($product['name_product']); ?>" style="max-width:200px;">
               <?php else: ?>
                 لا توجد صورة
               <?php endif; ?>
             </td>
             <td class="admin_table_th">
-              <a href="product.php?product_id=<?= htmlspecialchars($product['id_product']); ?>" class="btn btn-primary">عرض المنتج</a>
+              <a href="product.php?product_id=<?= htmlspecialchars($product['id_product']); ?>" class="btn btn-primary"> Show Details / عرض التفاصيل</a>
             </td>
           </tr>
         <?php endforeach; ?>
