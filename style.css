@@ -132,12 +132,14 @@ img {
 }
 @media (min-width: 768px) {
   .products-element {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
     margin: 200px 0px 0px 100px;
     width: 90%;
     height: 400px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+    padding-bottom: 55px;
   }
   .products-element img:hover {
     width: 75%;
@@ -146,8 +148,8 @@ img {
     width: 300px;
     height: 100%;
     object-fit: cover;
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    border: 2px solid rgba(255, 255, 255, 0.01);
     transition: all ease-in-out;
   }
   .card_product {

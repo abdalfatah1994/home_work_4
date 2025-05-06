@@ -1,128 +1,131 @@
 <?php
+session_start();
+if (!isset($_SESSION['user_id'])) {
+  header("Location: login.php");
+  exit;
+}
+
 $dsn = "mysql:host=localhost;dbname=store_data_base;charset=utf8";
-$username = "root";
-$password = "";
-
+$dbUsername = "root";
+$dbPassword = "";
+$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
+$error_message = "";
 try {
-  $conn = new PDO($dsn, $username, $password, [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES => false
-  ]);
-
-  $db_exists_query = "SELECT SCHEMA_NAME FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'store_data_base'";
-  $stmt = $conn->query($db_exists_query);
-
-  if ($stmt->rowCount() == 0) {
-    $conn->exec("CREATE DATABASE store_data_base");
-  }
+  $pdo = new PDO($dsn, $dbUsername, $dbPassword, $options);
 } catch (PDOException $e) {
-  die("فشل الاتصال بقاعدة البيانات: " . $e->getMessage());
+  $error_message .= "فشل الاتصال بقاعدة البيانات: " . $e->getMessage();
+}
+$products = [];
+try {
+  $stmt = $pdo->query("SELECT id_product, name_product, price_product, img_url_product FROM product_table");
+  $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+  $error_message .= "خطأ في جلب المنتجات: " . $e->getMessage();
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<lang="en">
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="./images/user_icon.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>عرض المنتجات</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./style.css">
-  <link rel="shortcut icon" type="image/x-icon" href="./images/icon_home.png">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <title> HOME PAGE </title>
-</head>
+  <body style="background: linear-gradient(to left, #547792, #007074);">
+    <!-- المحتوى الرئيسي: عرض المنتجات على شكل بطاقات - 4 بطاقات بكل صف -->
+    <div class="container mt-5 pt-5">
+      <?php if (!empty($error_message)): ?>
+        <div class="alert alert-danger" role="alert">
+          <?= htmlspecialchars($error_message); ?>
+        </div>
+      <?php endif; ?>
 
-<body style="padding-top: 50px;width: 100%;background-color: black;">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: linear-gradient(to left ,#547792,#ffffff);display: flex;position:fixed;width: 100%;top: 0px ; z-index: 99;">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="./index.php"> Home Page </a>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a Login class="nav-link active" aria-current="page" href="./login.php"> / Login </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./logout.php"> / Logout </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./index.php"> / About Us </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./index.php"> / CATALOGS </a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+      <div class="row">
+        <?php if (count($products) > 0): ?>
+          <?php foreach ($products as $product): ?>
+            <div class="col-md-3 mb-4">
+              <div class="card">
+                <?php if (!empty($product['img_url_product'])): ?>
+                  <a href="product.php?product_id=<?= htmlspecialchars($product['id_product']); ?>">
+                    <img src="<?= htmlspecialchars($product['img_url_product']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['name_product']); ?>" style="height:350px;width: 350px; object-fit:cover;">
+                  </a>
+                <?php else: ?>
+                  <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height:400px;">
+                    لا توجد صورة
+                  </div>
+                <?php endif; ?>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <div class="col-12">
+            <p class="text-center text-white">لا توجد منتجات معروضة حالياً.</p>
+          </div>
+        <?php endif; ?>
       </div>
     </div>
-  </nav>
-  <span class="element-footer">
-    <p>© 2025 All rights reserved </p>
-    <p> Developed AND MAINTAINED BY * ONBASHY COMPANEY * </p>
-    <p> Contact With Us </p>
-    <ul style="display: flex;list-style-type: none;font-size: 20px; ">
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="https://wa.me/+963951371241"> <i class="fa-brands fa-whatsapp"></i></a>
-      </li>
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="https://t.me/abdalfatah_onbashy"><i class="fa-brands fa-telegram"></i></a>
-      </li>
-      <li style="margin: 5px;" class="nav-item">
-        <a class="nav-link" href="https://www.facebook.com/share/16BY2dqi7T/"> <i class="fa-brands fa-facebook"></i></a>
-      </li>
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="https://www.abdalfatahonbashy1994@gmail.com"> <i class="fa-solid fa-envelope"></i></a>
-      </li>
-      <!--  github رابط -->
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="#"> <i class="fa-brands fa-github"></i> </a>
-      </li>
-      <!--  linkedin رابط -->
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="#"> <i class="fa-brands fa-linkedin"></i></i> </a>
-      </li>
-    </ul>
-  </span>
 
-  <!-- <div class="cards">
-    <a href="./products.php" class="card" target="_blank">
-      <div>GO TO PRODUCTS PAGE <br> الذهاب الى صفحة المنتجات</div>
-    </a>
-    <a href="./login.php" class="card">
-      <div> GO TO LOGIN PAGE <br> الذهاب الى صفحة تسجيل الدخول</div>
-    </a>
-    <a href="./users.php" class="card" target="_blank">
-      <div>GO TO USERS PAGE <br> الذهاب الى صفحة المستخدمين</div>
-    </a>
-  </div> -->
-  <div class="products-element">
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
-
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
-</body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: linear-gradient(to left ,#547792,#007074);display: flex;position:fixed;width: 100%;top: 0px ; z-index: 99;">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <a class="navbar-brand" href="./index.php"> Home Page </a>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a Login class="nav-link active" aria-current="page" href="./login.php"> / Login </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="./logout.php"> / Logout </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="./index.php"> / About Us </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="./index.php"> / CATALOGS </a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <span class="element-footer">
+      <p>© 2025 All rights reserved </p>
+      <p> Developed AND MAINTAINED BY * ONBASHY COMPANEY * </p>
+      <p> Contact With Us </p>
+      <ul style="display: flex;list-style-type: none;font-size: 20px; ">
+        <li class="nav-item" style="margin: 5px;">
+          <a class="nav-link" href="https://wa.me/+963951371241"> <i class="fa-brands fa-whatsapp"></i></a>
+        </li>
+        <li class="nav-item" style="margin: 5px;">
+          <a class="nav-link" href="https://t.me/abdalfatah_onbashy"><i class="fa-brands fa-telegram"></i></a>
+        </li>
+        <li style="margin: 5px;" class="nav-item">
+          <a class="nav-link" href="https://www.facebook.com/share/16BY2dqi7T/"> <i class="fa-brands fa-facebook"></i></a>
+        </li>
+        <li class="nav-item" style="margin: 5px;">
+          <a class="nav-link" href="https://www.abdalfatahonbashy1994@gmail.com"> <i class="fa-solid fa-envelope"></i></a>
+        </li>
+        <!--  github رابط -->
+        <li class="nav-item" style="margin: 5px;">
+          <a class="nav-link" href="#"> <i class="fa-brands fa-github"></i> </a>
+        </li>
+        <!--  linkedin رابط -->
+        <li class="nav-item" style="margin: 5px;">
+          <a class="nav-link" href="#"> <i class="fa-brands fa-linkedin"></i></i> </a>
+        </li>
+      </ul>
+    </span>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  </body>
 
 </html>
