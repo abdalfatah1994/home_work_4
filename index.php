@@ -33,7 +33,7 @@ try {
   <title> HOME PAGE </title>
 </head>
 
-<body style="padding-top: 50px;width: 100%;">
+<body style="padding-top: 50px;width: 100%;background-color: black;">
   <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: linear-gradient(to left ,#547792,#ffffff);display: flex;position:fixed;width: 100%;top: 0px ; z-index: 99;">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,7 +90,7 @@ try {
     </ul>
   </span>
 
-  <div class="cards">
+  <!-- <div class="cards">
     <a href="./products.php" class="card" target="_blank">
       <div>GO TO PRODUCTS PAGE <br> الذهاب الى صفحة المنتجات</div>
     </a>
@@ -100,9 +100,25 @@ try {
     <a href="./users.php" class="card" target="_blank">
       <div>GO TO USERS PAGE <br> الذهاب الى صفحة المستخدمين</div>
     </a>
-  </div>
+  </div> -->
   <div class="products-element">
-  
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
+  <a href="./products.php"><img src="./images/ppr/PIPE-500x500.jpg" alt="" loading="lazy"></a>
 
   </div>
 
