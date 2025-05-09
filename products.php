@@ -148,32 +148,36 @@ try {
   </div>
 </nav>
 
-<span class="element-footer">
-  <p>© 2025 All rights reserved </p>
-  <p> Developed AND MAINTAINED BY ONBASHY COMPANEY </p>
-  <p> Contact With Us </p>
-  <ul style="display: flex; list-style-type: none; font-size: 20px;">
-    <li class="nav-item" style="margin: 5px;">
-      <a class="nav-link" href="https://wa.me/+963951371241"> <i class="fa-brands fa-whatsapp"></i></a>
-    </li>
-    <li class="nav-item" style="margin: 5px;">
-      <a class="nav-link" href="https://t.me/abdalfatah_onbashy"><i class="fa-brands fa-telegram"></i></a>
-    </li>
-    <li class="nav-item" style="margin: 5px;">
-      <a class="nav-link" href="https://www.facebook.com/share/16BY2dqi7T/"> <i class="fa-brands fa-facebook"></i></a>
-    </li>
-    <li class="nav-item" style="margin: 5px;">
-      <a class="nav-link" href="mailto:abdalfatahonbashy1994@gmail.com"> <i class="fa-solid fa-envelope"></i></a>
-    </li>
-    <li class="nav-item" style="margin: 5px;">
-      <a class="nav-link" href="#"> <i class="fa-brands fa-github"></i> </a>
-    </li>
-    <li class="nav-item" style="margin: 5px;">
-      <a class="nav-link" href="#"> <i class="fa-brands fa-linkedin"></i> </a>
-    </li>
-  </ul>
-</span>
 
+<span class="element-footer">
+    <p>© 2025 All rights reserved </p>
+    <p> Developed AND MAINTAINED BY * ONBASHY COMPANEY * </p>
+    <p> Contact With Us </p>
+    <ul style="display: flex;list-style-type: none;font-size: 20px; ">
+      <li class="nav-item" style="margin: 5px;">
+        <a class="nav-link" href="https://wa.me/+963951371241"> <i class="fa-brands fa-whatsapp"></i></a>
+      </li>
+      <li class="nav-item" style="margin: 5px;">
+        <a class="nav-link" href="https://t.me/abdalfatah_onbashy"><i class="fa-brands fa-telegram"></i></a>
+      </li>
+      <li style="margin: 5px;" class="nav-item">
+        <a class="nav-link" href="https://www.facebook.com/share/16BY2dqi7T/"> <i class="fa-brands fa-facebook"></i></a>
+      </li>
+      <li class="nav-item" style="margin: 5px;">
+        <a class="nav-link" href="https://www.abdalfatahonbashy1994@gmail.com"> <i class="fa-solid fa-envelope"></i></a>
+      </li>
+      
+      <li class="nav-item" style="margin: 5px;">
+        <a class="nav-link" href="https://github.com/abdalfatah1994"> <i class="fa-brands fa-github"></i> </a>
+      </li>
+
+      <li class="nav-item" style="margin: 5px;">
+        <a class="nav-link" href="https://www.linkedin.com/in/%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%81%D8%AA%D8%A7%D8%AD-%D8%A7%D9%88%D9%86%D8%A8%D8%A7%D8%B4%D9%8A-7abb16230?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"> <i class="fa-brands fa-linkedin"></i></a>
+      </li>
+    </ul>
+  </span>
+
+  
 <body style="background: linear-gradient(to left, #547792, #007074); padding-top: 100px;">
 
     <?php if (!empty($error_message)): ?>
@@ -285,7 +289,7 @@ try {
       </div>
       <div class="form-group mb-2">
         <label>وصف المنتج / Product Description:</label>
-        <label name="discription_product" class="form-control" ></label>
+        <input type="text" name="discription_product" class="form-control" >
       </div>
       <button type="submit" name="add_user" >أضف المنتج / Add Product</button>
     </form>

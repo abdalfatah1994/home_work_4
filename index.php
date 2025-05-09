@@ -1,9 +1,4 @@
 <?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-  header("Location: login.php");
-  exit;
-}
 
 $dsn = "mysql:host=localhost;dbname=store_data_base;charset=utf8";
 $dbUsername = "root";
@@ -25,7 +20,8 @@ try {
 ?>
 <!DOCTYPE html>
 <lang="en">
-<html>
+  <html>
+
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,41 +29,39 @@ try {
     <link rel="shortcut icon" type="image/x-icon" href="./images/user_icon.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>عرض المنتجات</title>
+    <title> الصفحة الرئيسية </title>
   </head>
+  <?php if (!empty($error_message)): ?>
+    <div class="alert alert-danger" role="alert">
+      <?= htmlspecialchars($error_message); ?>
+    </div>
+  <?php endif; ?>
 
   <body style="background: linear-gradient(to left, #547792, #007074);">
-    <!-- المحتوى الرئيسي: عرض المنتجات على شكل بطاقات - 4 بطاقات بكل صف -->
-    <div class="container mt-5 pt-5">
-      <?php if (!empty($error_message)): ?>
-        <div class="alert alert-danger" role="alert">
-          <?= htmlspecialchars($error_message); ?>
+
+    <div class="row_index">
+      <?php if (count($products) > 0): ?>
+        <?php foreach ($products as $product): ?>
+          <div class="col_index">
+            <div class="card_index">
+              <?php if (!empty($product['img_url_product'])): ?>
+                <a href="product.php?product_id=<?= htmlspecialchars($product['id_product']); ?>">
+                  <img src="<?= htmlspecialchars($product['img_url_product']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['name_product']); ?>" style="max-height:350px;max-width: 350px; object-fit:cover;">
+                  <p class="card-img-top" style="color: #45a049;font-size: 20px;font-weight: 600;text-decoration: none;"> <?= htmlspecialchars($product['name_product']); ?> <br> السعر / Price ???</p>
+                </a>
+              <?php else: ?>
+                <div class="card-img-top" style="max-height:400px;">
+                  لا توجد صورة
+                </div>
+              <?php endif; ?>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <div>
+          <p class="text-center text-white">لا توجد منتجات معروضة حالياً.</p>
         </div>
       <?php endif; ?>
-
-      <div class="row">
-        <?php if (count($products) > 0): ?>
-          <?php foreach ($products as $product): ?>
-            <div class="col-md-3 mb-4">
-              <div class="card">
-                <?php if (!empty($product['img_url_product'])): ?>
-                  <a href="product.php?product_id=<?= htmlspecialchars($product['id_product']); ?>">
-                    <img src="<?= htmlspecialchars($product['img_url_product']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['name_product']); ?>" style="height:350px;width: 350px; object-fit:cover;">
-                  </a>
-                <?php else: ?>
-                  <div class="card-img-top bg-secondary text-white d-flex align-items-center justify-content-center" style="height:400px;">
-                    لا توجد صورة
-                  </div>
-                <?php endif; ?>
-              </div>
-            </div>
-          <?php endforeach; ?>
-        <?php else: ?>
-          <div class="col-12">
-            <p class="text-center text-white">لا توجد منتجات معروضة حالياً.</p>
-          </div>
-        <?php endif; ?>
-      </div>
     </div>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: linear-gradient(to left ,#547792,#007074);display: flex;position:fixed;width: 100%;top: 0px ; z-index: 99;">
@@ -117,15 +111,14 @@ try {
         </li>
         <!--  github رابط -->
         <li class="nav-item" style="margin: 5px;">
-          <a class="nav-link" href="#"> <i class="fa-brands fa-github"></i> </a>
+          <a class="nav-link" href="https://github.com/abdalfatah1994"> <i class="fa-brands fa-github"></i> </a>
         </li>
-        <!--  linkedin رابط -->
         <li class="nav-item" style="margin: 5px;">
-          <a class="nav-link" href="#"> <i class="fa-brands fa-linkedin"></i></i> </a>
+          <a class="nav-link" href="https://www.linkedin.com/in/%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%81%D8%AA%D8%A7%D8%AD-%D8%A7%D9%88%D9%86%D8%A8%D8%A7%D8%B4%D9%8A-7abb16230?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"> <i class="fa-brands fa-linkedin"></i></a>
         </li>
       </ul>
     </span>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
   </body>
 
-</html>
+  </html>

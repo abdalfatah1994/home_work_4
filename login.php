@@ -80,10 +80,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       </div>
     </div>
   </nav>
-  <!-- </div> -->
+
   <span class="element-footer">
     <p>© 2025 All rights reserved </p>
-    <p> Developed AND MAINTAINED BY ONBASHY COMPANEY </p>
+    <p> Developed AND MAINTAINED BY * ONBASHY COMPANEY * </p>
     <p> Contact With Us </p>
     <ul style="display: flex;list-style-type: none;font-size: 20px; ">
       <li class="nav-item" style="margin: 5px;">
@@ -98,16 +98,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <li class="nav-item" style="margin: 5px;">
         <a class="nav-link" href="https://www.abdalfatahonbashy1994@gmail.com"> <i class="fa-solid fa-envelope"></i></a>
       </li>
-      <!--  github رابط -->
+      
       <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="#"> <i class="fa-brands fa-github"></i> </a>
+        <a class="nav-link" href="https://github.com/abdalfatah1994"> <i class="fa-brands fa-github"></i> </a>
       </li>
-      <!--  linkedin رابط -->
+
       <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="#"> <i class="fa-brands fa-linkedin"></i></i> </a>
+        <a class="nav-link" href="https://www.linkedin.com/in/%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%81%D8%AA%D8%A7%D8%AD-%D8%A7%D9%88%D9%86%D8%A8%D8%A7%D8%B4%D9%8A-7abb16230?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"> <i class="fa-brands fa-linkedin"></i></a>
       </li>
     </ul>
   </span>
+
+  
   <div class="background">
     <span></span>
     <span></span>
