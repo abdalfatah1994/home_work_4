@@ -49,64 +49,40 @@ try {
   <title>تفاصيل المنتج</title>
 </head>
 
-<body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: linear-gradient(to left, #547792, #ffffff); display: flex; position: fixed; width: 100%; top: 0px; z-index: 99;">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="./index.php"> Home Page </a>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./login.php"> / Login </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./logout.php"> / Logout </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./index.php"> / About Us </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./index.php"> / CATALOGS </a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: linear-gradient(to left ,#547792,#007074);display: flex;position:fixed;width: 100%;top: 0px ; z-index: 99;">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand" href="./index.php"> Home Page </a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a Login class="nav-link active" aria-current="page" href="./login.php"> / Login </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="./logout.php"> / Logout </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="./index.php"> / About Us </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="./index.php"> / CATALOGS </a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
+        <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+        <h2 style="color: red;text-decoration: double;"> ( <?= htmlspecialchars($_SESSION['username']) ?> ) </h2>
+        <h2 for="username"> : User Name / اسم المستخدم </h2>
+      </form>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <span class="element-footer">
-    <p>© 2025 All rights reserved </p>
-    <p> Developed AND MAINTAINED BY * ONBASHY COMPANEY * </p>
-    <p> Contact With Us </p>
-    <ul style="display: flex;list-style-type: none;font-size: 20px; ">
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="https://wa.me/+963951371241"> <i class="fa-brands fa-whatsapp"></i></a>
-      </li>
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="https://t.me/abdalfatah_onbashy"><i class="fa-brands fa-telegram"></i></a>
-      </li>
-      <li style="margin: 5px;" class="nav-item">
-        <a class="nav-link" href="https://www.facebook.com/share/16BY2dqi7T/"> <i class="fa-brands fa-facebook"></i></a>
-      </li>
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="https://www.abdalfatahonbashy1994@gmail.com"> <i class="fa-solid fa-envelope"></i></a>
-      </li>
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="https://github.com/abdalfatah1994"> <i class="fa-brands fa-github"></i> </a>
-      </li>
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="https://www.linkedin.com/in/%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%81%D8%AA%D8%A7%D8%AD-%D8%A7%D9%88%D9%86%D8%A8%D8%A7%D8%B4%D9%8A-7abb16230?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"> <i class="fa-brands fa-linkedin"></i></a>
-      </li>
-    </ul>
-  </span>
-
-  
+<body style="  background:linear-gradient(to right ,#547792,#007074);">
   <div class="container">
+
     <?php if (!empty($error_message)): ?>
       <div class="alert alert-danger" role="alert">
         <?= $error_message; ?>
@@ -114,7 +90,7 @@ try {
     <?php else: ?>
       <div class="card_product">
         <?php if (!empty($product['img_url_product'])): ?>
-          <img src="<?= htmlspecialchars($product['img_url_product']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['name_product']); ?>" style="max-height:300px; object-fit:cover;">
+          <img loading="lazy" src="<?= htmlspecialchars($product['img_url_product']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['name_product']); ?>" style="max-height:300px; object-fit:cover;">
         <?php endif; ?>
         <div class="card-body">
           <h3 class="card-title"><?= htmlspecialchars($product['name_product']); ?></h3>
@@ -127,5 +103,29 @@ try {
   </div>
 
 </body>
+
+<span class="element-footer" style="position: fixed;bottom: 0px;">
+  <p>© 2025 All rights reserved / Developed AND MAINTAINED BY<br> * ONBASHY COMPANEY * <br> Contact With Us </p>
+  <ul style="display: flex;list-style-type: none;font-size: 10px; ">
+    <li class="nav-item" style="margin: 3px;font-size: 20px;">
+      <a class="nav-link" href="https://wa.me/+963951371241"> <i class="fa-brands fa-whatsapp"></i></a>
+    </li>
+    <li class="nav-item" style="margin: 3px;font-size: 20px;">
+      <a class="nav-link" href="https://t.me/abdalfatah_onbashy"><i class="fa-brands fa-telegram"></i></a>
+    </li>
+    <li style="margin: 3px;font-size: 20px;" class="nav-item">
+      <a class="nav-link" href="https://www.facebook.com/share/16BY2dqi7T/"> <i class="fa-brands fa-facebook"></i></a>
+    </li>
+    <li class="nav-item" style="margin: 3px;font-size: 20px;">
+      <a class="nav-link" href="https://www.abdalfatahonbashy1994@gmail.com"> <i class="fa-solid fa-envelope"></i></a>
+    </li>
+    <li class="nav-item" style="margin: 3px;font-size: 20px;">
+      <a class="nav-link" href="https://github.com/abdalfatah1994"> <i class="fa-brands fa-github"></i> </a>
+    </li>
+    <li class="nav-item" style="margin: 3px;font-size: 20px;">
+      <a class="nav-link" href="https://www.linkedin.com/in/%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%81%D8%AA%D8%A7%D8%AD-%D8%A7%D9%88%D9%86%D8%A8%D8%A7%D8%B4%D9%8A-7abb16230?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"> <i class="fa-brands fa-linkedin"></i></a>
+    </li>
+  </ul>
+</span>
 
 </html>
