@@ -107,8 +107,10 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
         </li>
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <!-- <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"> -->
+        <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+        <h2 style="color: red;text-decoration: double;"> ( <?= htmlspecialchars($_SESSION['username']) ?> ) </h2>
+        <h2 for="username"> : User Name / اسم المستخدم </h2>
       </form>
     </div>
   </div>
@@ -149,9 +151,9 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
         <td class="admin_table_th">
           <form method="POST">
             <input type="hidden" name="user_id" value="<?= $user['id_user'] ?>">
-            <input type="text" name="new_username" value="<?= $user['username'] ?>" required>
-            <input type="email" name="new_email" value="<?= $user['email'] ?>" required>
-            <button type="submit" name="update_user"> Update User / تعديل البيانات </button>
+            <input type="text" name="new_username" style="margin: 8px;padding: 5px;" value="<?= $user['username'] ?>" required>
+            <input type="email" name="new_email" style="margin: 8px;padding: 5px;" value="<?= $user['email'] ?>" required>
+            <button type="submit" name="update_user" style="border-radius: 5px;margin: 8px;padding: 8px 5px;"> Update User / تعديل البيانات </button>
           </form>
         </td>
       </tr>

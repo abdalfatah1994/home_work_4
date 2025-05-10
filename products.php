@@ -141,8 +141,10 @@ try {
         </li>
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
+        <!-- <input class="form-control me-2" type="search" placeholder="Search"> -->
+        <!-- <button class="btn btn-outline-success" type="submit">Search</button> -->
+        <h2 style="color: red;text-decoration: double;"> ( <?= htmlspecialchars($_SESSION['username']) ?> ) </h2>
+        <h2 for="username"> : User Name / اسم المستخدم </h2>
       </form>
     </div>
   </div>
@@ -150,151 +152,148 @@ try {
 
 
 <span class="element-footer">
-    <p>© 2025 All rights reserved </p>
-    <p> Developed AND MAINTAINED BY * ONBASHY COMPANEY * </p>
-    <p> Contact With Us </p>
-    <ul style="display: flex;list-style-type: none;font-size: 20px; ">
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="https://wa.me/+963951371241"> <i class="fa-brands fa-whatsapp"></i></a>
-      </li>
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="https://t.me/abdalfatah_onbashy"><i class="fa-brands fa-telegram"></i></a>
-      </li>
-      <li style="margin: 5px;" class="nav-item">
-        <a class="nav-link" href="https://www.facebook.com/share/16BY2dqi7T/"> <i class="fa-brands fa-facebook"></i></a>
-      </li>
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="https://www.abdalfatahonbashy1994@gmail.com"> <i class="fa-solid fa-envelope"></i></a>
-      </li>
-      
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="https://github.com/abdalfatah1994"> <i class="fa-brands fa-github"></i> </a>
-      </li>
+  <p>© 2025 All rights reserved </p>
+  <p> Developed AND MAINTAINED BY * ONBASHY COMPANEY * </p>
+  <p> Contact With Us </p>
+  <ul style="display: flex;list-style-type: none;font-size: 20px; ">
+    <li class="nav-item" style="margin: 5px;">
+      <a class="nav-link" href="https://wa.me/+963951371241"> <i class="fa-brands fa-whatsapp"></i></a>
+    </li>
+    <li class="nav-item" style="margin: 5px;">
+      <a class="nav-link" href="https://t.me/abdalfatah_onbashy"><i class="fa-brands fa-telegram"></i></a>
+    </li>
+    <li style="margin: 5px;" class="nav-item">
+      <a class="nav-link" href="https://www.facebook.com/share/16BY2dqi7T/"> <i class="fa-brands fa-facebook"></i></a>
+    </li>
+    <li class="nav-item" style="margin: 5px;">
+      <a class="nav-link" href="https://www.abdalfatahonbashy1994@gmail.com"> <i class="fa-solid fa-envelope"></i></a>
+    </li>
 
-      <li class="nav-item" style="margin: 5px;">
-        <a class="nav-link" href="https://www.linkedin.com/in/%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%81%D8%AA%D8%A7%D8%AD-%D8%A7%D9%88%D9%86%D8%A8%D8%A7%D8%B4%D9%8A-7abb16230?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"> <i class="fa-brands fa-linkedin"></i></a>
-      </li>
-    </ul>
-  </span>
+    <li class="nav-item" style="margin: 5px;">
+      <a class="nav-link" href="https://github.com/abdalfatah1994"> <i class="fa-brands fa-github"></i> </a>
+    </li>
 
-  
+    <li class="nav-item" style="margin: 5px;">
+      <a class="nav-link" href="https://www.linkedin.com/in/%D8%B9%D8%A8%D8%AF%D8%A7%D9%84%D9%81%D8%AA%D8%A7%D8%AD-%D8%A7%D9%88%D9%86%D8%A8%D8%A7%D8%B4%D9%8A-7abb16230?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"> <i class="fa-brands fa-linkedin"></i></a>
+    </li>
+  </ul>
+</span>
+
+
 <body style="background: linear-gradient(to left, #547792, #007074); padding-top: 100px;">
 
-    <?php if (!empty($error_message)): ?>
-      <div class="alert alert-danger" role="alert">
-        <?= $error_message; ?>
-      </div>
+  <?php if (!empty($error_message)): ?>
+    <div class="alert alert-danger" role="alert">
+      <?= $error_message; ?>
+    </div>
+  <?php endif; ?>
+  <?php if (isset($_GET['edit_id'])):
+    $edit_id = intval($_GET['edit_id']);
+    $edit_product = false;
+    try {
+      $stmt = $pdo->prepare("SELECT * FROM product_table WHERE id_product = :id");
+      $stmt->execute([':id' => $edit_id]);
+      $edit_product = $stmt->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+      $error_message .= "خطأ في جلب بيانات المنتج للتعديل: " . $e->getMessage();
+    }
+  ?>
+    <?php if ($edit_product): ?>
+      <h2 class="mt-4">تعديل المنتج / Edit Product</h2>
+      <form method="post" class="mb-4">
+        <input type="hidden" name="action" value="edit">
+        <input type="hidden" name="product_id" value="<?= $edit_product['id_product']; ?>">
+        <div class="form-group mb-2">
+          <label>اسم المنتج / Product Name:</label>
+          <input type="text" name="name_product" value="<?= htmlspecialchars($edit_product['name_product']); ?>" class="form-control" required>
+        </div>
+        <div class="form-group mb-2">
+          <label>السعر / Price:</label>
+          <input type="number" step="0.01" name="price_product" value="<?= htmlspecialchars($edit_product['price_product']); ?>" class="form-control" required>
+        </div>
+        <div class="form-group mb-2">
+          <label>رابط الصورة / Image URL:</label>
+          <input type="text" name="img_url_product" value="<?= htmlspecialchars($edit_product['img_url_product']); ?>" class="form-control">
+        </div>
+        <div class="form-group mb-2">
+          <label>وصف المنتج / Product Description:</label>
+          <textarea name="discription_product" class="form-control" rows="3"><?= htmlspecialchars($edit_product['discription_product']); ?></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">تعديل / Edit Product</button>
+        <a href="<?= $_SERVER['PHP_SELF']; ?>" class="btn btn-secondary">إلغاء / Cancel</a>
+      </form>
+    <?php else: ?>
+      <p>المنتج غير موجود.</p>
     <?php endif; ?>
+  <?php endif; ?>
 
-    <!-- نموذج تعديل المنتج يظهر في حال تم استدعاء تعديل باستخدام GET -->
-    <?php if (isset($_GET['edit_id'])):
-      $edit_id = intval($_GET['edit_id']);
-      $edit_product = false;
-      try {
-        $stmt = $pdo->prepare("SELECT * FROM product_table WHERE id_product = :id");
-        $stmt->execute([':id' => $edit_id]);
-        $edit_product = $stmt->fetch(PDO::FETCH_ASSOC);
-      } catch (PDOException $e) {
-        $error_message .= "خطأ في جلب بيانات المنتج للتعديل: " . $e->getMessage();
-      }
-    ?>
-      <?php if ($edit_product): ?>
-        <h2 class="mt-4">تعديل المنتج / Edit Product</h2>
-        <form method="post" class="mb-4">
-          <input type="hidden" name="action" value="edit">
-          <input type="hidden" name="product_id" value="<?= $edit_product['id_product']; ?>">
-          <div class="form-group mb-2">
-            <label>اسم المنتج / Product Name:</label>
-            <input type="text" name="name_product" value="<?= htmlspecialchars($edit_product['name_product']); ?>" class="form-control" required>
-          </div>
-          <div class="form-group mb-2">
-            <label>السعر / Price:</label>
-            <input type="number" step="0.01" name="price_product" value="<?= htmlspecialchars($edit_product['price_product']); ?>" class="form-control" required>
-          </div>
-          <div class="form-group mb-2">
-            <label>رابط الصورة / Image URL:</label>
-            <input type="text" name="img_url_product" value="<?= htmlspecialchars($edit_product['img_url_product']); ?>" class="form-control">
-          </div>
-          <div class="form-group mb-2">
-            <label>وصف المنتج / Product Description:</label>
-            <textarea name="discription_product" class="form-control" rows="3"><?= htmlspecialchars($edit_product['discription_product']); ?></textarea>
-          </div>
-          <button type="submit" class="btn btn-success">تعديل / Edit Product</button>
-          <a href="<?= $_SERVER['PHP_SELF']; ?>" class="btn btn-secondary">إلغاء / Cancel</a>
-        </form>
-      <?php else: ?>
-        <p>المنتج غير موجود.</p>
-      <?php endif; ?>
-    <?php endif; ?>
-
-    <!-- جدول عرض المنتجات -->
-    <table class="admin_table" style="margin:65px; width: 200vh;">
-      <tr>
-        <th class="admin_table_th">PRODUCT NAME / اسم المنتج</th>
-        <th class="admin_table_th">$ : PRICE السعر</th>
-        <th class="admin_table_th">IMAGE / الصورة</th>
-        <th class="admin_table_th">ACTIONS / الإجراءات</th>
-      </tr>
-      <?php if (count($products) > 0): ?>
-        <?php foreach ($products as $product): ?>
-          <tr>
-            <td class="admin_table_th"><?= strtoupper(htmlspecialchars($product['name_product'])); ?></td>
-            <td class="admin_table_th"><?= htmlspecialchars($product['price_product']); ?></td>
-            <td class="admin_table_th">
-              <?php if (!empty($product['img_url_product'])): ?>
-                <img src="<?= htmlspecialchars($product['img_url_product']); ?>" alt="<?= htmlspecialchars($product['name_product']); ?>" style="max-width:200px;">
-              <?php else: ?>
-                لا توجد صورة
-              <?php endif; ?>
-            </td>
-            <td class="admin_table_th">
-              <a href="product.php?product_id=<?= htmlspecialchars($product['id_product']); ?>" class="btn btn-primary">
-                Show Details / عرض التفاصيل
-              </a>
-              <a href="?edit_id=<?= htmlspecialchars($product['id_product']); ?>" class="btn btn-success">
-                Edit / تعديل
-              </a>
-              <form method="post" style="display:inline-block;">
-                <input type="hidden" name="action" value="delete">
-                <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['id_product']); ?>">
-                <button type="submit" class="btn btn-danger" onclick="return confirm('هل أنت متأكد من حذف هذا المنتج?');">
-                  Delete / حذف
-                </button>
-              </form>
-            </td>
-          </tr>
-        <?php endforeach; ?>
-      <?php else: ?>
+  <!-- جدول عرض المنتجات -->
+  <table class="admin_table" style="margin:65px; width: 200vh;">
+    <tr>
+      <th class="admin_table_th">PRODUCT NAME / اسم المنتج</th>
+      <th class="admin_table_th">$ : PRICE السعر</th>
+      <th class="admin_table_th">IMAGE / الصورة</th>
+      <th class="admin_table_th">ACTIONS / الإجراءات</th>
+    </tr>
+    <?php if (count($products) > 0): ?>
+      <?php foreach ($products as $product): ?>
         <tr>
-          <td colspan="4" class="admin_table_th">لا توجد منتجات معروضة حالياً.</td>
+          <td class="admin_table_th"><?= strtoupper(htmlspecialchars($product['name_product'])); ?></td>
+          <td class="admin_table_th"><?= htmlspecialchars($product['price_product']); ?></td>
+          <td class="admin_table_th">
+            <?php if (!empty($product['img_url_product'])): ?>
+              <img loading="lazy" src="<?= htmlspecialchars($product['img_url_product']); ?>" alt="<?= htmlspecialchars($product['name_product']); ?>" style="max-width:200px;">
+            <?php else: ?>
+              لا توجد صورة
+            <?php endif; ?>
+          </td>
+          <td class="admin_table_th">
+            <a href="product.php?product_id=<?= htmlspecialchars($product['id_product']); ?>" class="btn btn-primary">
+              Show Details / عرض التفاصيل
+            </a>
+            <a href="?edit_id=<?= htmlspecialchars($product['id_product']); ?>" class="btn btn-success">
+              Edit / تعديل
+            </a>
+            <form method="post" style="display:inline-block;">
+              <input type="hidden" name="action" value="delete">
+              <input type="hidden" name="product_id" value="<?= htmlspecialchars($product['id_product']); ?>">
+              <button type="submit" class="btn btn-danger" onclick="return confirm('هل أنت متأكد من حذف هذا المنتج?');">
+                Delete / حذف
+              </button>
+            </form>
+          </td>
         </tr>
-      <?php endif; ?>
-    </table>
+      <?php endforeach; ?>
+    <?php else: ?>
+      <tr>
+        <td colspan="4" class="admin_table_th">لا توجد منتجات معروضة حالياً.</td>
+      </tr>
+    <?php endif; ?>
+  </table>
 
-    <!-- نموذج إضافة منتج جديد يتم عرضه في نهاية الصفحة -->
-    <h2 style="text-align: center;">إضافة منتج جديد / Add New Product</h2>
-    <form method="post" class="admin_new_user">
-      <input type="hidden" name="action" value="add">
-      <div class="form-group mb-2">
-        <label>اسم المنتج / Product Name:</label>
-        <input type="text" name="name_product" class="form-control" required>
-      </div>
-      <div class="form-group mb-2">
-        <label>السعر / Price:</label>
-        <input type="number" step="0.01" name="price_product" class="form-control" required>
-      </div>
-      <div class="form-group mb-2">
-        <label>رابط الصورة / Image URL:</label>
-        <input type="text" name="img_url_product" class="form-control">
-      </div>
-      <div class="form-group mb-2">
-        <label>وصف المنتج / Product Description:</label>
-        <input type="text" name="discription_product" class="form-control" >
-      </div>
-      <button type="submit" name="add_user" >أضف المنتج / Add Product</button>
-    </form>
-    <br>
-    <br>
+  <h2 style="text-align: center;">إضافة منتج جديد / Add New Product</h2>
+  <form method="post" class="admin_new_user">
+    <input type="hidden" name="action" value="add">
+    <div class="form-group mb-2">
+      <label>اسم المنتج / Product Name:</label>
+      <input type="text" name="name_product" class="form-control" required>
+    </div>
+    <div class="form-group mb-2">
+      <label>السعر / Price:</label>
+      <input type="number" step="0.01" name="price_product" class="form-control" required>
+    </div>
+    <div class="form-group mb-2">
+      <label>رابط الصورة / Image URL:</label>
+      <input type="text" name="img_url_product" class="form-control">
+    </div>
+    <div class="form-group mb-2">
+      <label>وصف المنتج / Product Description:</label>
+      <input type="text" name="discription_product" class="form-control">
+    </div>
+    <button type="submit" name="add_user">أضف المنتج / Add Product</button>
+  </form>
+  <br>
+  <br>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>

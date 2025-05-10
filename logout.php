@@ -38,8 +38,8 @@ if (isset($_POST['logout'])) {
 
     <table border="1" style="width: 50%; margin: auto; text-align: center;font-size: 26px;">
         <tr>
-            <th>اسم المستخدم</th>
-            <th>مدة تسجيل الدخول</th>
+            <th> User Name / اسم المستخدم</th>
+            <th> Time / مدة تسجيل الدخول</th>
         </tr>
         <tr>
             <td><?= htmlspecialchars($_SESSION['username']) ?></td>
