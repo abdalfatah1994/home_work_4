@@ -191,7 +191,7 @@ img {
   .col_index {
     flex-wrap: wrap;
     justify-content: space-between;
-    flex: 1 1 calc(25% - 20px); /* يجعل كل عنصر يأخذ ربع المساحة المتاحة */
+    flex: 1 1 calc(25% - 20px); 
     max-width: calc(25% - 20px);
     gap: 20px;
   }
@@ -434,6 +434,7 @@ img {
   }
   .input-login {
     padding-left: 20px;
+    height: 75px;
   }
   .label_login {
     align-items: center;
@@ -497,7 +498,7 @@ img {
   padding: 10px;
   width: 600px;
   height: 500px;
-  backdrop-filter: brightness(40%);
+  /* backdrop-filter: brightness(40%); */
   gap: 10px;
 }
 .signup_form {
