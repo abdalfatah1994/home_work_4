@@ -85,7 +85,87 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
   <title>إدارة المستخدمين </title>
 </head>
 
-<span class="element-footer">
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: linear-gradient(to left ,#547792,#ffffff);display: flex;position:fixed;width: 100%;top: 0px ; z-index: 99;">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+      <a class="navbar-brand" href="./index.php"> Home Page </a>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a Login class="nav-link active" aria-current="page" href="./login.php"> / Login </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="./logout.php"> / Logout </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="./index.php"> / About Us </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="./index.php"> / CATALOGS </a>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<body>
+  <h3 class="admin_hader"> Users Data table / جدول بيانات المستخدمين</h3>
+  <table class="admin_table" style="margin: 50px 0px;">
+    <tr>
+      <th class="admin_table_th">النوع الحالي للحساب <br> Account Type</th>
+      <th class="admin_table_th">البريد الإلكتروني / Email</th>
+      <th class="admin_table_th">اسم المستخدم / Username</th>
+      <th class="admin_table_th">تعديل نوع المستخدم / Edit User Type</th>
+      <th class="admin_table_th">حذف المستخدم / Delete User</th>
+      <th class="admin_table_th">تعديل بيانات المستخدم / Edit User Info</th>
+    </tr> <?php foreach ($users as $user): ?>
+      <tr>
+        <td th class="admin_table_th"><?= htmlspecialchars($user['role']) ?></td>
+        <td th class="admin_table_th"><?= htmlspecialchars($user['email']) ?></td>
+        <td th class="admin_table_th"><?= htmlspecialchars($user['username']) ?></td>
+        <td th class="admin_table_th">
+          <form method="POST">
+            <input type="hidden" name="user_id" value="<?= $user['id_user'] ?>">
+            <select name="new_role">
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
+            </select>
+            <button type="submit" name="update_role"> Edite User / تعديل الدور</button>
+          </form>
+        </td>
+        <td class="admin_table_th">
+          <form method="POST">
+            <input type="hidden" name="user_id" value="<?= $user['id_user'] ?>">
+            <button type="submit" name="delete_user" onclick="return confirm('هل أنت متأكد Are You Sure ؟');"> Deleta / حذف </button>
+          </form>
+        </td>
+        <td class="admin_table_th">
+          <form method="POST">
+            <input type="hidden" name="user_id" value="<?= $user['id_user'] ?>">
+            <input type="text" name="new_username" value="<?= $user['username'] ?>" required>
+            <input type="email" name="new_email" value="<?= $user['email'] ?>" required>
+            <button type="submit" name="update_user"> Update User / تعديل البيانات </button>
+          </form>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+  </table>
+  <!-- إضافة مستخدم جديد -->
+  <h4 style="display: flex; justify-content: space-around; align-items: center;color: #547792;font-weight: 700;font-size: 28px;"> Add New User / إضافة مستخدم جديد</h4>
+  <form method="POST" class="admin_new_user" style="padding-bottom: 75px;">
+    <input type="text" name="new_username" placeholder="User Name / اسم المستخدم" required>
+    <input type="email" name="new_email" placeholder=" E-mail / البريد الإلكتروني" required>
+    <input type="password" name="new_password" placeholder="Password / كلمة المرور" required>
+    <button type="submit" name="add_user"> Add User / إضافة مستخدم</button>
+  </form>
+  <span class="element-footer" style="display: flex; justify-content: space-around;">
     <p>© 2025 All rights reserved </p>
     <p> Developed AND MAINTAINED BY * ONBASHY COMPANEY * </p>
     <p> Contact With Us </p>
@@ -102,7 +182,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
       <li class="nav-item" style="margin: 5px;">
         <a class="nav-link" href="https://www.abdalfatahonbashy1994@gmail.com"> <i class="fa-solid fa-envelope"></i></a>
       </li>
-      
+
       <li class="nav-item" style="margin: 5px;">
         <a class="nav-link" href="https://github.com/abdalfatah1994"> <i class="fa-brands fa-github"></i> </a>
       </li>
@@ -112,86 +192,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
       </li>
     </ul>
   </span>
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background: linear-gradient(to left ,#547792,#ffffff);display: flex;position:fixed;width: 100%;top: 0px ; z-index: 99;">
-    <div class="container-fluid">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="./index.php"> Home Page </a>
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a Login class="nav-link active" aria-current="page" href="./login.php"> / Login </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./logout.php"> / Logout </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./index.php"> / About Us </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="./index.php"> / CATALOGS </a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-
-  <h3 class="admin_hader"> Users Data table / جدول بيانات المستخدمين</h3>
-  <table class="admin_table">
-    <tr>
-      <th class="admin_table_th">النوع الحالي للحساب</th>
-      <th class="admin_table_th">البريد الإلكتروني</th>
-      <th class="admin_table_th">اسم المستخدم</th>
-      <th class="admin_table_th">تعديل نوع المستخدم</th>
-      <th class="admin_table_th">حذف المستخدم</th>
-      <th class="admin_table_th">تعديل بيانات المستخدم</th>
-    </tr>
-    <?php foreach ($users as $user): ?>
-      <tr>
-        <td th class="admin_table_th"><?= htmlspecialchars($user['role']) ?></td>
-        <td th class="admin_table_th"><?= htmlspecialchars($user['email']) ?></td>
-        <td th class="admin_table_th"><?= htmlspecialchars($user['username']) ?></td>
-        <td th class="admin_table_th">
-          <form method="POST">
-            <input type="hidden" name="user_id" value="<?= $user['id_user'] ?>">
-            <select name="new_role">
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
-            <button type="submit" name="update_role">تعديل الدور</button>
-          </form>
-        </td>
-        <td class="admin_table_th">
-          <form method="POST">
-            <input type="hidden" name="user_id" value="<?= $user['id_user'] ?>">
-            <button type="submit" name="delete_user" onclick="return confirm('هل أنت متأكد؟');">حذف</button>
-          </form>
-        </td>
-        <td class="admin_table_th">
-          <form method="POST">
-            <input type="hidden" name="user_id" value="<?= $user['id_user'] ?>">
-            <input type="text" name="new_username" value="<?= $user['username'] ?>" required>
-            <input type="email" name="new_email" value="<?= $user['email'] ?>" required>
-            <button type="submit" name="update_user">تعديل البيانات</button>
-          </form>
-        </td>
-      </tr>
-    <?php endforeach; ?>
-  </table>
-    <!-- إضافة مستخدم جديد -->
-    <h4>إضافة مستخدم جديد</h4>
-    <form method="POST" class="admin_new_user">
-        <input type="text" name="new_username" placeholder="اسم المستخدم" required>
-        <input type="email" name="new_email" placeholder="البريد الإلكتروني" required>
-        <input type="password" name="new_password" placeholder="كلمة المرور" required>
-        <button type="submit" name="add_user">إضافة مستخدم</button>
-    </form>
 
 </body>
 

@@ -7,8 +7,86 @@ img {
   width: 100%;
   height: auto;
 }
-
 @media (max-width: 767px) {
+  .admin_new_user {
+    display: grid;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    width: 100%;
+  }
+
+  .admin_new_user input {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 5px;
+    align-items: center;
+  }
+  
+  .admin_new_user label {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    font-size: 18px;
+    padding: 15px 8px;
+  }
+  
+  .admin_new_user button {
+    width: 100%;
+    align-items: center;
+    margin: 10px;
+    padding: 10px 15px;
+    background-color: #547792;
+    color: #ffffff;
+    border: black 3px solid;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+  .admin_table {
+    background: linear-gradient(to bottom, #547792, #007074);
+    border: #333 solid 2px;
+    width: 50%;
+    background-color: #0056b3;
+    border-collapse: collapse;
+  }
+  .admin_table_th {
+    padding: 5px;
+    border: 0.75px solid black;
+    font-size: 14px;
+    text-align: center;
+  }
+
+  .card_product {
+    padding-top: 35px;
+    background: linear-gradient(to left, #547792, #007074);
+  }
+  .card-body {
+    text-align: center;
+  }
+  .col_index {
+    background: linear-gradient(to bottom, #547792, #007074);
+    align-items: center;
+    padding-top: 50px;
+  }
+  .card_index {
+    border-radius: 10px;
+    box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
+    margin: 10px 5px;
+    padding: 15px 5px;
+    text-align: center;
+  }
+
+  .card-img-top {
+    margin: 0px 5px;
+    color: #45a049;
+    padding: 5px;
+    font-size: 20px;
+    text-align: center;
+    font-weight: 600;
+    text-decoration: none;
+  }
   .element-footer {
     display: flex;
     flex-wrap: wrap;
@@ -133,13 +211,13 @@ img {
 }
 @media (min-width: 768px) {
   .row_index {
-    padding: 90px 30px ;
+    padding: 90px 30px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
   }
-  
+
   .col_index {
     flex-wrap: wrap;
     justify-content: space-between;
@@ -202,6 +280,7 @@ img {
   }
   .admin_table {
     width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
     border-collapse: collapse;
     border: 2px solid #ddd;
   }

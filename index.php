@@ -26,7 +26,7 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <link rel="shortcut icon" type="image/x-icon" href="./images/user_icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="./images//icon_home.png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title> الصفحة الرئيسية </title>
@@ -47,7 +47,7 @@ try {
               <?php if (!empty($product['img_url_product'])): ?>
                 <a href="product.php?product_id=<?= htmlspecialchars($product['id_product']); ?>">
                   <img src="<?= htmlspecialchars($product['img_url_product']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['name_product']); ?>" style="max-height:350px;max-width: 350px; object-fit:cover;">
-                  <p class="card-img-top" style="color: #45a049;font-size: 20px;font-weight: 600;text-decoration: none;"> <?= htmlspecialchars($product['name_product']); ?> <br> السعر / Price ???</p>
+                  <p class="card-img-top" > <?= htmlspecialchars($product['name_product']); ?> <br> السعر / Price ???</p>
                 </a>
               <?php else: ?>
                 <div class="card-img-top" style="max-height:400px;">
